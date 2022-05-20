@@ -55,3 +55,12 @@ class MovieService:
 
     def delete(self, mid):
         self.dao.delete(mid)
+
+    def movies_by_director(self, did):
+        return self.dao.movies_by_filter_director(did)
+
+    def movies_by_genre(self, genre):
+        return self.dao.movies_by_filter_genre(genre)
+
+    def movies_by_year(self, year):
+        return self.dao.movies_by_filter_year(year)
