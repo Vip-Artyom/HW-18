@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 from flask_restx import Resource, Namespace
 from container import movie_service
 from dao.models.movie import MovieSchema
@@ -33,10 +33,13 @@ class MoviesView(Resource):
 
     def post(self):
         req_json = request.get_json()
-
+        movie_id = req_json["id"]
         movie_service.create(req_json)
 
-        return "", 201
+        responce = jsonify()
+        responce.status_code = 201
+        responce.headers["Location"] = f"{movie_id}"
+        return responce
 
 
 @movie_ns.route('/<int:mid>')
